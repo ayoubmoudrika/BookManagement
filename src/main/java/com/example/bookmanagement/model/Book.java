@@ -25,6 +25,16 @@ public class Book {
     @Column(name = "author")
     private String author;
 
+    @Column(name = "genre")
+
+    private String genre;
+
+    @Column(name = "height")
+    private int height;
+
+    @Column(name = "publisher")
+    private String publisher;
+
     public Book(String title, String author) {
     }
 }

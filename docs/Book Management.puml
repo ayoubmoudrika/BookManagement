@@ -1,0 +1,41 @@
+@startuml
+
+class Book {
+ - id: Long
+ - title : String
+ - author : String
+}
+
+class BookController {
++ addBook(String: String): void
+}
+
+interface IBookRepository {
+
+}
+
+interface IBookService
+class BookServiceImpl {
+}
+
+class BookManagementApplication
+
+class BookAdmin {
+    - name: String
+    - password: String
+
+}
+
+BookServiceImpl -- IBookRepository
+BookController --- BookServiceImpl
+BookController --- Book
+BookAdmin --- BookController
+IBookService -- BookServiceImpl
+
+
+
+
+
+
+
+@enduml
