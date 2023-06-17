@@ -3,57 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 
-<a href="/loadBooks">Initialiser la base de données embedded H2</a>
+<body>
+<a href="/loadBooks">Initialize Books Database</a>
 
-<form id="searchForm" action="/searchBook" method="GET">
+<div class="menu">
+    <ul>
+        <li><a href="addBook.html" onclick="addBook()">Add Book</a></li>
+    </ul>
+</div>
+
+<form id="searchForm" action="/searchBookByTitle" method="GET">
     <input type="text" name="query" placeholder="Search by title" />
     <button type="submit">Search</button>
 </form>
+
 <div id="searchResults"></div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(function() {
-        $('#searchForm').submit(function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            var query = $('input[name="query"]').val();
-            searchBooks(query);
-        });
-
-        function searchBooks(query) {
-            $.ajax({
-                url: '/searchBook',
-                method: 'GET',
-                data: { query: query },
-                success: function(data) {
-                    displaySearchResults(data);
-                },
-                error: function(error) {
-                    console.error(error);
-                }
-            });
-        }
-        function displaySearchResults(results) {
-            var container = $('#searchResults');
-            container.empty(); // Clear previous results
-
-            if (results.length === 0) {
-                container.text('No results found.');
-            } else {
-                var ul = $('<ul>');
-                results.forEach(function(book) {
-                    var li = $('<li>').text(book.title);
-                    ul.append(li);
-                });
-                container.append(ul);
-            }
-        }
-    });
-</script>
-
-<body>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="search.js"> </script>
+<script src="bookOperations.js"> </script>
+
+
 </html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements IBookService {
@@ -24,7 +25,33 @@ public class BookServiceImpl implements IBookService {
         bookRepository.save(book);
     }
 
+    @Override
+    public boolean deleteBookById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+
+        if (bookOptional.isPresent()) {
+            bookRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public List<Book> searchBookByTitle(String query){
         return bookRepository.findBookByTitle(query);
+    }
+
+    @Override
+    public List<Book> searchBookByAuthor(String query) {
+        return bookRepository.findBookByAuthor(query);
+    }
+
+    public List<Book> searchBookByGenre(String query) {
+        return bookRepository.findBookByGenre(query);
+    }
+
+    @Override
+    public List<Book> searchBookByPublisher(String query) {
+        return bookRepository.findBookByPublisher(query);
     }
 }
