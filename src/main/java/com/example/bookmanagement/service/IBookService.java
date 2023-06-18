@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IBookService {
 
-    void addBook(String title, String author, String genre, int height, String publisher);
+    void addBook(String title, String author, String genre, int height, String publisher, String status);
 
     boolean deleteBookById(Long id);
 
@@ -19,7 +19,6 @@ public interface IBookService {
 
     List<Book> searchBookByPublisher(String query);
 
-
-
-
+    List<Book> getAllBooks();
+    void updateBook(Long id, Book updatedBook);
 }

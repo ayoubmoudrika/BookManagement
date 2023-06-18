@@ -1,6 +1,8 @@
 package com.example.bookmanagement.controller;
 
+import Util.CSVParser;
 import com.example.bookmanagement.model.Book;
+import com.example.bookmanagement.service.BookNotFoundException;
 import com.example.bookmanagement.service.BookServiceImpl;
 import com.example.bookmanagement.service.IBookService;
 import com.opencsv.CSVReader;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,24 +31,26 @@ public class BookController {
 
     @PostMapping("/addBook")
     public void addBook(@RequestParam String title, String author, String genre, int height, String publisher) throws IOException {
-            bookService.addBook(title, author, genre, height, publisher);
+            bookService.addBook(title, author, genre, height, publisher, "AVAILABLE");
     }
 
     @GetMapping("/loadBooks")
-    public void loadBooks() {
-        String csvFile = "src/main/book.csv";
+    public void loadBooks() throws IOException {
 
-        List<String[]> rows = new ArrayList<>();
+        List<String[]> rows = CSVParser.parseCSV("src/main/book.csv");
 
-        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
-            String[] line;
-            while ((line = reader.readNext()) != null) {
-                rows.add(line);
-                addBook(line[0], line[1], line[2], Integer.parseInt(line[3]), line[4]);
-            }
-        } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+        for (int i = 0; i < rows.size() ; i++) {
+
+            addBook(rows.get(i)[0],rows.get(i)[1],rows.get(i)[2], Integer.parseInt(rows.get(i)[3]),rows.get(i)[4]);
+
         }
+
+    }
+
+    @GetMapping("getAllBooks")
+    @ResponseBody
+    public List<Book> getAllBooks(){
+        return bookService.getAllBooks();
     }
 
     @DeleteMapping("/deleteBook/{id}")
@@ -56,6 +61,17 @@ public class BookController {
             return ResponseEntity.ok("Book deleted successfully.");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
+        }
+    }
+
+    @PutMapping("/updateBook/{id}")
+    public void updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+        try {
+            bookService.updateBook(id, updatedBook);
+        } catch (BookNotFoundException ex) {
+            // Handle the exception and return an appropriate response
+            // For example, you can return a 404 Not Found response
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
     }
 
@@ -81,6 +97,10 @@ public class BookController {
     public List<Book> searchBookByPublisher(@RequestParam("query") String query) {
         return bookService.searchBookByPublisher(query);
     }
+
+
+
+
 
 
 

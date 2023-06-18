@@ -35,6 +35,10 @@ public class Book {
     @Column(name = "publisher")
     private String publisher;
 
+    @Column(name = "status")
+    private String status;
+
     public Book(String title, String author) {
     }
+
 }

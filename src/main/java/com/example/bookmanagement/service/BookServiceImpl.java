@@ -15,13 +15,14 @@ public class BookServiceImpl implements IBookService {
     private IBookRepository bookRepository;
 
     @Override
-    public void addBook(String title, String author, String genre, int height, String publisher) {
+    public void addBook(String title, String author, String genre, int height, String publisher, String status) {
         Book book = new Book();
         book.setTitle(title);
         book.setAuthor(author);
         book.setGenre(genre);
         book.setHeight(height);
         book.setPublisher(publisher);
+        book.setStatus(status);
         bookRepository.save(book);
     }
 
@@ -54,4 +55,30 @@ public class BookServiceImpl implements IBookService {
     public List<Book> searchBookByPublisher(String query) {
         return bookRepository.findBookByPublisher(query);
     }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
+    @Override
+    public void updateBook(Long id, Book updatedBook) {
+
+        // Retrieve the existing book from the database
+        Book existingBook = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
+
+        // Update the attributes of the existing book with the values from the updated book
+        existingBook.setTitle(updatedBook.getTitle());
+        existingBook.setAuthor(updatedBook.getAuthor());
+        existingBook.setGenre(updatedBook.getGenre());
+        existingBook.setHeight(updatedBook.getHeight());
+        existingBook.setPublisher(updatedBook.getPublisher());
+        // Update other attributes as needed
+
+        // Save the updated book
+        bookRepository.save(existingBook);
+    }
+
+
 }
