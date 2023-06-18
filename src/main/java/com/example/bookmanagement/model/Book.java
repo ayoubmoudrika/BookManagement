@@ -3,7 +3,9 @@ package com.example.bookmanagement.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="books")
@@ -37,6 +39,9 @@ public class Book {
 
     @Column(name = "status")
     private String status;
+
+    @OneToMany(mappedBy = "book")
+    private List<Loan> loans = new ArrayList<>();
 
     public Book(String title, String author) {
     }

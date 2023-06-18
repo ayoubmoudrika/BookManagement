@@ -34,6 +34,9 @@ public class BookController {
             bookService.addBook(title, author, genre, height, publisher, "AVAILABLE");
     }
 
+
+
+
     @GetMapping("/loadBooks")
     public void loadBooks() throws IOException {
 
@@ -51,6 +54,10 @@ public class BookController {
     @ResponseBody
     public List<Book> getAllBooks(){
         return bookService.getAllBooks();
+    }
+
+    public List<Book> getAllLoanedBooks(){
+        return bookService.getAllLoanedBooks();
     }
 
     @DeleteMapping("/deleteBook/{id}")

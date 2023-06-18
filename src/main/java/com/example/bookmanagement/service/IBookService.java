@@ -21,4 +21,8 @@ public interface IBookService {
 
     List<Book> getAllBooks();
     void updateBook(Long id, Book updatedBook);
+
+    void getLoanedBooks(Long id);
+
+    List<Book> getAllLoanedBooks();
 }

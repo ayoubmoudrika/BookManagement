@@ -35,7 +35,6 @@ public class UserController {
         for (int i = 0; i < rows.size() ; i++) {
 
             addUser(rows.get(i)[0],rows.get(i)[1],rows.get(i)[2]);
-
         }
 
     }
@@ -52,7 +51,6 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // Endpoint to loan a book for a user
     @GetMapping("/{userId}/books/{bookId}/loan")
     public ResponseEntity<String> loanBook(@PathVariable Long userId, @PathVariable Long bookId) {
 

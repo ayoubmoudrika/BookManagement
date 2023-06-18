@@ -80,5 +80,14 @@ public class BookServiceImpl implements IBookService {
         bookRepository.save(existingBook);
     }
 
+    @Override
+    public void getLoanedBooks(Long id) {
+
+    }
+
+    @Override
+    public List<Book> getAllLoanedBooks() {
+        return null;
+    }
 
 }
