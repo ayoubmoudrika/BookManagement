@@ -1,15 +1,13 @@
-package com.example.bookmanagement.service;
+package com.example.bookmanagement.user;
 
-import com.example.bookmanagement.model.Book;
-import com.example.bookmanagement.model.Loan;
-import com.example.bookmanagement.model.User;
-import com.example.bookmanagement.repository.IBookRepository;
-import com.example.bookmanagement.repository.ILoanRepository;
-import com.example.bookmanagement.repository.IUserRepository;
+import com.example.bookmanagement.Book.Book;
+import com.example.bookmanagement.loan.Loan;
+import com.example.bookmanagement.Book.IBookRepository;
+import com.example.bookmanagement.loan.ILoanRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +31,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void loanBook(Long userId, Long bookId) {
+    public ResponseEntity<String> loanBook(Long userId, Long bookId) {
 
         Optional<User> userOptional = userRepository.findById(userId);
 
@@ -41,10 +39,10 @@ public class UserServiceImpl implements IUserService {
 
             User user = userOptional.get();
             Optional<Book> bookOptional = bookRepository.findById(bookId);
+            Book book = bookOptional.get();
 
-            if ( bookOptional.isPresent() ) {
+            if ( bookOptional.isPresent() && book.isAvailable() ) {
 
-                Book book = bookOptional.get();
                 bookOptional.get().setStatus("LOANED");
                 bookRepository.save( bookOptional.get() );
 
@@ -63,18 +61,16 @@ public class UserServiceImpl implements IUserService {
                 loanRepository.save( loan );
                 userRepository.save( user );
 
+            } else {
+                return ResponseEntity.ok("Error: this book is already loaned by someone else.");
             }
         }
+        return ResponseEntity.ok("Book loaned successfully");
     }
 
     @Override
     public void addUser(String name, String email, String phone) {
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        userRepository.save(user);
-
+        userRepository.save( UserFactory.createUser( name, email, phone) );
     }
 
     @Override

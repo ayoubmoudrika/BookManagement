@@ -1,4 +1,4 @@
-package com.example.bookmanagement.service;
+package com.example.bookmanagement.Book;
 
 public class BookNotFoundException extends RuntimeException {
     public BookNotFoundException(Long id) {

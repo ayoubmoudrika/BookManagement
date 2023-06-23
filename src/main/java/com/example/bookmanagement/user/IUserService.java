@@ -1,7 +1,6 @@
-package com.example.bookmanagement.service;
+package com.example.bookmanagement.user;
 
-import com.example.bookmanagement.model.Book;
-import com.example.bookmanagement.model.User;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public interface IUserService {
 
      User createUser(User user);
 
-     void loanBook(Long userId, Long bookId);
+     ResponseEntity<String> loanBook(Long userId, Long bookId);
 
      void addUser(String name, String email, String phone);
 

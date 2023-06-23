@@ -1,7 +1,5 @@
-package com.example.bookmanagement.service;
+package com.example.bookmanagement.Book;
 
-import com.example.bookmanagement.model.Book;
-import com.example.bookmanagement.repository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +14,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public void addBook(String title, String author, String genre, int height, String publisher, String status) {
-        Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setGenre(genre);
-        book.setHeight(height);
-        book.setPublisher(publisher);
-        book.setStatus(status);
-        bookRepository.save(book);
+        bookRepository.save( BookFactory.createBook( title, author, genre, height, publisher, status ) );
     }
 
     @Override
@@ -64,19 +55,15 @@ public class BookServiceImpl implements IBookService {
     @Override
     public void updateBook(Long id, Book updatedBook) {
 
-        // Retrieve the existing book from the database
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
 
-        // Update the attributes of the existing book with the values from the updated book
         existingBook.setTitle(updatedBook.getTitle());
         existingBook.setAuthor(updatedBook.getAuthor());
         existingBook.setGenre(updatedBook.getGenre());
         existingBook.setHeight(updatedBook.getHeight());
         existingBook.setPublisher(updatedBook.getPublisher());
-        // Update other attributes as needed
 
-        // Save the updated book
         bookRepository.save(existingBook);
     }
 

@@ -1,5 +1,7 @@
-package com.example.bookmanagement.model;
+package com.example.bookmanagement.loan;
 
+import com.example.bookmanagement.Book.Book;
+import com.example.bookmanagement.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

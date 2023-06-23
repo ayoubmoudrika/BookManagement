@@ -1,36 +1,32 @@
 @startuml
 
+
+
 class Book {
- - id: Long
- - title : String
- - author : String
 }
 
 class BookController {
-+ addBook(String: String): void
-}
-
-interface IBookRepository {
 
 }
 
-interface IBookService
 class BookServiceImpl {
 }
 
-class BookManagementApplication
+class User {}
+class UserController {}
+class UserServiceImpl {}
 
-class BookAdmin {
-    - name: String
-    - password: String
+class Loan {}
 
-}
 
-BookServiceImpl -- IBookRepository
-BookController --- BookServiceImpl
-BookController --- Book
-BookAdmin --- BookController
-IBookService -- BookServiceImpl
+
+BookController - BookServiceImpl
+BookController -- Book
+
+User -- Book
+User - Loan
+UserController - UserServiceImpl
+
 
 
 

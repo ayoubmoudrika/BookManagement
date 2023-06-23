@@ -1,6 +1,6 @@
-package com.example.bookmanagement.service;
+package com.example.bookmanagement.Book;
 
-import com.example.bookmanagement.model.Book;
+import com.example.bookmanagement.Book.Book;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
-package com.example.bookmanagement.model;
+package com.example.bookmanagement.user;
 
+import com.example.bookmanagement.loan.Loan;
 import lombok.*;
 
 import javax.persistence.*;

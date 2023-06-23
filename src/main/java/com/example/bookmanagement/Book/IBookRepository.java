@@ -1,6 +1,6 @@
-package com.example.bookmanagement.repository;
+package com.example.bookmanagement.Book;
 
-import com.example.bookmanagement.model.Book;
+import com.example.bookmanagement.Book.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

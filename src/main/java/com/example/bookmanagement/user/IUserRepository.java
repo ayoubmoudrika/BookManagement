@@ -1,6 +1,5 @@
-package com.example.bookmanagement.repository;
+package com.example.bookmanagement.user;
 
-import com.example.bookmanagement.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserRepository extends JpaRepository<User, Long> {
