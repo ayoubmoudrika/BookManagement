@@ -1,4 +1,6 @@
-package com.example.bookmanagement.Book;
+package com.example.bookmanagement.booksearch;
+
+import com.example.bookmanagement.Book.Book;
 
 import java.util.ArrayList;
 import java.util.List;

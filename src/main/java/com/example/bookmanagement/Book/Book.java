@@ -48,6 +48,8 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Reservation> reservations = new ArrayList<>();
 
+
+
     public Book(String title, String author) {
     }
 
@@ -71,7 +73,9 @@ public class Book {
     public boolean isReserved(LocalDate loanStatingDate) {
 
         for (Reservation reservation: reservations) {
-
+            if ( loanStatingDate.plusDays( 21 ).isAfter( reservation.getReservationDate() ) ){
+                return true;
+            }
         }
         return false;
     }

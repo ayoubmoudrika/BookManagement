@@ -99,13 +99,11 @@ public class UserServiceImpl implements IUserService {
 
                 Reservation reservation = ReservationFactory.createReservation(user, book, todayDate, loanStartingDate);
                 reservationRepository.save(reservation);
+            } else {
+                return ResponseEntity.ok("Error: this book is already reserved by someone else.");
             }
-
-
-        } else {
-            return ResponseEntity.ok("Error: this book is already reserved by someone else.");
         }
-
         return ResponseEntity.ok("Book reserved successfully");
     }
 }
+

@@ -35,7 +35,19 @@ public class Loan {
     private String userName;
     private String bookTitle;
 
+    private boolean isLate;
+
     public Loan() {
+    }
+
+    public void isLate() {
+        LocalDate todayDate = LocalDate.now();
+
+        if ( todayDate.isAfter( dueDate ) ) {
+            isLate = true;
+        } else {
+            isLate = false;
+        }
     }
 
 
