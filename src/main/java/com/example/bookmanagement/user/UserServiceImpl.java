@@ -4,6 +4,7 @@ import com.example.bookmanagement.Book.Book;
 import com.example.bookmanagement.loan.Loan;
 import com.example.bookmanagement.Book.IBookRepository;
 import com.example.bookmanagement.loan.ILoanRepository;
+import com.example.bookmanagement.loan.LoanFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -43,19 +44,13 @@ public class UserServiceImpl implements IUserService {
 
             if ( bookOptional.isPresent() && book.isAvailable() ) {
 
-                bookOptional.get().setStatus("LOANED");
-                bookRepository.save( bookOptional.get() );
+                book.setStatus( "LOANED" );
+                bookRepository.save( book );
 
                 LocalDate loanDate = LocalDate.parse("2023-05-21");
                 LocalDate dueDate = LocalDate.parse("2023-06-21");
 
-                Loan loan = new Loan( );
-                loan.setUser( user );
-                loan.setBook( bookOptional.get() );
-                loan.setLoanDate( loanDate) ;
-                loan.setDueDate( dueDate );
-                loan.setUserName( user.getName() );
-                loan.setBookTitle( book.getTitle()) ;
+                Loan loan = LoanFactory.createLoan( user, book, loanDate, dueDate, user.getName(), book.getTitle() );
 
                 user.getLoans().add( loan );
                 loanRepository.save( loan );

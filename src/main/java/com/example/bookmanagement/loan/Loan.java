@@ -3,6 +3,7 @@ package com.example.bookmanagement.loan;
 import com.example.bookmanagement.Book.Book;
 import com.example.bookmanagement.user.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

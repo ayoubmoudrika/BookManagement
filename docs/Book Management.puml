@@ -1,24 +1,12 @@
 @startuml
 
-
-
-class Book {
-}
-
-class BookController {
-
-}
-
-class BookServiceImpl {
-}
-
+class Book {}
+class BookController {}
+class BookServiceImpl {}
 class User {}
 class UserController {}
 class UserServiceImpl {}
-
 class Loan {}
-
-
 
 BookController - BookServiceImpl
 BookController -- Book
@@ -26,12 +14,5 @@ BookController -- Book
 User -- Book
 User - Loan
 UserController - UserServiceImpl
-
-
-
-
-
-
-
 
 @enduml
