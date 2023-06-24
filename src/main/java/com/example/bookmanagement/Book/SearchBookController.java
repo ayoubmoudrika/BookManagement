@@ -21,28 +21,6 @@ public class SearchBookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/searchBookByAuthor")
-    @ResponseBody
-    public List<Book> searchBookByAuthor(@RequestParam("query") String query) {
-        return bookService.searchBookByAuthor(query);
-    }
-    @GetMapping("/searchBookByTitle")
-    @ResponseBody
-    public List<Book> searchBookByTitle(@RequestParam("query") String query) {
-        return bookService.searchBookByTitle(query);
-    }
-
-    @GetMapping("/searchBookByGenre")
-    @ResponseBody
-    public List<Book> searchBookByGenre(@RequestParam("query") String query) {
-        return bookService.searchBookByGenre(query);
-    }
-
-    @GetMapping("/searchBookByPublisher")
-    @ResponseBody
-    public List<Book> searchBookByPublisher(@RequestParam("query") String query) {
-        return bookService.searchBookByPublisher(query);
-    }
     @GetMapping("/searchBooks")
     @ResponseBody
     public List<Book> searchBooks(@RequestParam("query") String query) {

@@ -15,9 +15,10 @@ public class BookSearch {
         long startTime = System.currentTimeMillis();
 
         for (Book book : bookCollection) {
-            if (matchesRegex(pattern, book.getTitle()) ||
-                    matchesRegex(pattern, book.getAuthor()) ||
-                    matchesRegex(pattern, book.getGenre())) {
+            if (matchesRegex( pattern, book.getTitle() ) ||
+                    matchesRegex( pattern, book.getAuthor() ) ||
+                    matchesRegex( pattern, book.getGenre() ) ||
+                    matchesRegex( pattern, book.getPublisher() ) ) {
                 searchResults.add(book);
             }
         }

@@ -1,9 +1,11 @@
 package com.example.bookmanagement.Book;
 
 import com.example.bookmanagement.loan.Loan;
+import com.example.bookmanagement.reservation.Reservation;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,9 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<Loan> loans = new ArrayList<>();
 
+    @OneToMany(mappedBy = "book")
+    private List<Reservation> reservations = new ArrayList<>();
+
     public Book(String title, String author) {
     }
 
@@ -55,12 +60,20 @@ public class Book {
         this.status = status;
     }
 
-    public boolean isAvailable(){
+    public boolean isAvailable() {
         if ( getStatus().equals( "AVAILABLE" ) ){
             return true;
         } else {
             return false;
         }
+    }
+
+    public boolean isReserved(LocalDate loanStatingDate) {
+
+        for (Reservation reservation: reservations) {
+
+        }
+        return false;
     }
 
 }
